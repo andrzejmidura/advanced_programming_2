@@ -133,6 +133,7 @@ namespace CarRental
             this.clearButton.TabIndex = 8;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // saveButton
             // 
@@ -143,6 +144,7 @@ namespace CarRental
             this.saveButton.TabIndex = 9;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // returnButton
             // 
@@ -153,12 +155,14 @@ namespace CarRental
             this.returnButton.TabIndex = 10;
             this.returnButton.Text = "Return to menu";
             this.returnButton.UseVisualStyleBackColor = true;
+            this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
             // imgPictureBox
             // 
             this.imgPictureBox.Location = new System.Drawing.Point(516, 71);
             this.imgPictureBox.Name = "imgPictureBox";
             this.imgPictureBox.Size = new System.Drawing.Size(430, 245);
+            this.imgPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgPictureBox.TabIndex = 11;
             this.imgPictureBox.TabStop = false;
             // 

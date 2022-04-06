@@ -12,26 +12,29 @@ namespace CarRental
 {
     public partial class MainForm : Form
     {
+        ConfigureCarForm ccf;
+        OrderForm of;
+        TestDriveReservationForm tdrf;
         public MainForm()
         {
             InitializeComponent();
+            ccf = new ConfigureCarForm();
+            of = new OrderForm();
+            tdrf = new TestDriveReservationForm();
         }
 
         private void configureCarButton_Click(object sender, EventArgs e)
         {
-            ConfigureCarForm ccf = new ConfigureCarForm();
             ccf.ShowDialog();
         }
 
         private void orderCarButton_Click(object sender, EventArgs e)
         {
-            OrderForm of = new OrderForm();
             of.ShowDialog();
         }
 
         private void reservationButton_Click(object sender, EventArgs e)
         {
-            TestDriveReservationForm tdrf = new TestDriveReservationForm();
             tdrf.ShowDialog();
         }
 

@@ -3,7 +3,7 @@ using Npgsql;
 
 namespace CarRental
 {
-    class DatabaseConnection
+    public class DatabaseConnection
     {
         public string auth = "Server=localhost;Port=5432;Database=CarRental;User Id=postgres;Password=aXk9JHacRVOXZqJfhzQP";
         public NpgsqlConnection conn;
@@ -13,7 +13,6 @@ namespace CarRental
 
         public DatabaseConnection()
         {
-            connectToDatabase();
             dt = new DataTable();
         }
 
@@ -33,6 +32,7 @@ namespace CarRental
 
         public void query(string s)
         {
+            connectToDatabase();
             dt.Clear();
             comm.CommandText = s;
             dr = comm.ExecuteReader();
@@ -40,6 +40,8 @@ namespace CarRental
             {
                 dt.Load(dr);
             }
+            dr.Close();
+            disconnectFromDatabase();
         }
     }
 }

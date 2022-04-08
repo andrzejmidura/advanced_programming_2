@@ -185,6 +185,7 @@ namespace CarRental
             this.Controls.Add(this.brandLabel);
             this.Name = "ConfigureCarForm";
             this.Text = "ConfigureCar";
+            this.Load += new System.EventHandler(this.ConfigureCarForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imgPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

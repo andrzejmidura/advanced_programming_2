@@ -7,15 +7,21 @@ namespace CarRental
 {
     public partial class ConfigureCarForm : Form
     {
-        private DatabaseConnection dbc = new DatabaseConnection();
+        private DatabaseConnection dbc;
         private string[] brands;
         private int idVehicle;
-        private int savedIdVehicle;
-        public ConfigureCarForm()
+        private int savedIdVehicle = -1;
+        public ConfigureCarForm(ref DatabaseConnection dbc_)
         {
             InitializeComponent();
+            this.dbc = dbc_;
             dbc.connectToDatabase();
             updateBrandComboBox();
+        }
+
+        public int getSavedIdVehicle()
+        {
+            return this.savedIdVehicle;
         }
 
         private void updateBrandComboBox()
@@ -137,6 +143,11 @@ namespace CarRental
         private void returnButton_Click(object sender, System.EventArgs e)
         {
             this.Hide();
+        }
+
+        private void ConfigureCarForm_Load(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

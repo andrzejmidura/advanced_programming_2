@@ -8,7 +8,6 @@ namespace CarRental
     public partial class ConfigureCarForm : Form
     {
         private DatabaseConnection dbc;
-        private string[] brands;
         private int idVehicle;
         private int savedIdVehicle = -1;
         public ConfigureCarForm(ref DatabaseConnection dbc_)

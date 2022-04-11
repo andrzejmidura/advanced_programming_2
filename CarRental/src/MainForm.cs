@@ -25,15 +25,8 @@ namespace CarRental
 
         private void orderCarButton_Click(object sender, EventArgs e)
         {
-            if (ccf.getSavedIdVehicle()==-1)
-            {
-                MessageBox.Show("You must configure the car before placing an order!", "No car configured", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                of.setIdVehicle(ccf.getSavedIdVehicle());
-                of.ShowDialog();
-            }
+            of.setIdVehicle(ccf.getSavedIdVehicle());
+            of.ShowDialog();
         }
 
         private void reservationButton_Click(object sender, EventArgs e)

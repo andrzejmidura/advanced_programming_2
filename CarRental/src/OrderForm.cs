@@ -28,7 +28,11 @@ namespace CarRental
 
         private void orderButton_Click(object sender, EventArgs e)
         {
-            if (textboxesAreValid())
+            if (idVehicle == -1)
+            {
+                MessageBox.Show("You must configure the car before placing an order!", "No car configured", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (textboxesAreValid())
             {
                     dbc.query("select idClient from clients where name='" + nameTextBox.Text +
                                                     "' and surname='" + surnameTextBox.Text +
@@ -51,11 +55,29 @@ namespace CarRental
 
         private void refreshOrders()
         {
-            dbc.query("select o.idorder, v.brand, v.model, v.engine, v.color from clients c join orders o using(idClient) join vehicles v using(idVehicle) where c.name='" + nameTextBox.Text +
+            if (textboxesAreValid())
+            {
+                dbc.query("select o.idorder, v.brand, v.model, v.engine, v.color from clients c join orders o using(idClient) join vehicles v using(idVehicle) where c.name='" + nameTextBox.Text +
                                                                                                                                                           "' and c.surname='" + surnameTextBox.Text +
                                                                                                                                                           "' and c.address='" + addressTextBox.Text +
                                                                                                                                                           "' and c.phone=" + phone.ToString() + "::NUMERIC;");
-            ordersDataGrid.DataSource = dbc.dt.DefaultView.ToTable(false, "idorder", "brand", "model", "engine", "color");
+                if (dbc.dt.Rows.Count == 0)
+                {
+                    ordersDataGrid.DataSource = null;
+                    MessageBox.Show("No cars ordered by you.", "No cars ordered", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    try
+                    {
+                        ordersDataGrid.DataSource = dbc.dt.DefaultView.ToTable(false, "idorder", "brand", "model", "engine", "color");
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Query error occured!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
 
         private void returnButton_Click(object sender, EventArgs e)
@@ -107,6 +129,11 @@ namespace CarRental
                 }
             }
             return false;
+        }
+
+        private void OrderForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

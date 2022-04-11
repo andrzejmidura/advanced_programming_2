@@ -202,6 +202,7 @@ namespace CarRental
             this.Controls.Add(this.cancelOrderButton);
             this.Name = "OrderForm";
             this.Text = "Order";
+            this.Load += new System.EventHandler(this.OrderForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ordersDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

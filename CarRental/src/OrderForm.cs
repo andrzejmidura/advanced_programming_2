@@ -13,7 +13,7 @@ namespace CarRental
     public partial class OrderForm : Form
     {
         public DatabaseConnection dbc;
-        private int idClient;
+        private int idClient = -1;
         private int idVehicle;
         private int phone;
         public OrderForm()
@@ -51,6 +51,10 @@ namespace CarRental
                     dbc.query("insert into orders(idClient, idVehicle, orderDate) values(" + idClient.ToString() + ", " + idVehicle.ToString() + ", '" + orderDate + "');");
                     refreshOrders();
             }
+            else
+            {
+                MessageBox.Show("Provide all necessary information!", "Information missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void refreshOrders()
@@ -78,6 +82,10 @@ namespace CarRental
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Provide all necessary information!", "Information missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void returnButton_Click(object sender, EventArgs e)
@@ -101,7 +109,11 @@ namespace CarRental
 
         private void showOrdersButton_Click(object sender, EventArgs e)
         {
-            if (textboxesAreValid()) 
+            if (!textboxesAreValid())
+            {
+                MessageBox.Show("Provide all necessary information!", "Information missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
             { 
                 refreshOrders();
             }
@@ -109,14 +121,10 @@ namespace CarRental
 
         private bool textboxesAreValid()
         {
-            if (nameTextBox.Text == "" ||
-                surnameTextBox.Text == "" ||
-                addressTextBox.Text == "" ||
-                phoneTextBox.Text == "")
-            {
-                MessageBox.Show("Provide all necessary information!", "Information missing", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
+            if (nameTextBox.Text != "" &&
+                surnameTextBox.Text != "" &&
+                addressTextBox.Text != "" &&
+                phoneTextBox.Text != "")
             {
                 phone = Int32.Parse(phoneTextBox.Text);
                 if (phone < 0 || phone > 999999999)
@@ -134,6 +142,26 @@ namespace CarRental
         private void OrderForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public int getIdClient()
+        {
+            return this.idClient;
+        }
+
+        private void textBox_Leave(object sender, EventArgs e)
+        {
+            if (textboxesAreValid())
+            {
+                dbc.query("select idClient from clients where name='" + nameTextBox.Text +
+                                                    "' and surname='" + surnameTextBox.Text +
+                                                    "' and address='" + addressTextBox.Text +
+                                                    "' and phone=" + phone.ToString() + "::NUMERIC;");
+                if (dbc.dt.Rows.Count == 1)
+                {
+                    idClient = dbc.dt.Rows[0].Field<int>("idClient");
+                }
+            }
         }
     }
 }

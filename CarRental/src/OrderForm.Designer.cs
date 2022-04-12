@@ -136,6 +136,7 @@ namespace CarRental
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(260, 26);
             this.nameTextBox.TabIndex = 9;
+            this.nameTextBox.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // surnameTextBox
             // 
@@ -144,6 +145,7 @@ namespace CarRental
             this.surnameTextBox.Name = "surnameTextBox";
             this.surnameTextBox.Size = new System.Drawing.Size(260, 26);
             this.surnameTextBox.TabIndex = 10;
+            this.surnameTextBox.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // addressTextBox
             // 
@@ -152,6 +154,7 @@ namespace CarRental
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.Size = new System.Drawing.Size(260, 26);
             this.addressTextBox.TabIndex = 11;
+            this.addressTextBox.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // phoneTextBox
             // 
@@ -160,6 +163,7 @@ namespace CarRental
             this.phoneTextBox.Name = "phoneTextBox";
             this.phoneTextBox.Size = new System.Drawing.Size(260, 26);
             this.phoneTextBox.TabIndex = 12;
+            this.phoneTextBox.Leave += new System.EventHandler(this.textBox_Leave);
             // 
             // ordersDataGrid
             // 

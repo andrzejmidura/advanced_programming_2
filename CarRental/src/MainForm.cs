@@ -15,7 +15,7 @@ namespace CarRental
             dbc = new DatabaseConnection();
             ccf = new ConfigureCarForm(ref dbc);
             of = new OrderForm(ref dbc);
-            tdrf = new TestDriveReservationForm();
+            tdrf = new TestDriveReservationForm(ref dbc);
         }
 
         private void configureCarButton_Click(object sender, EventArgs e)
@@ -31,6 +31,7 @@ namespace CarRental
 
         private void reservationButton_Click(object sender, EventArgs e)
         {
+            tdrf.setIdClient(of.getIdClient());
             tdrf.ShowDialog();
         }
 

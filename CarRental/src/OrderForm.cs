@@ -95,11 +95,17 @@ namespace CarRental
 
         private void cancelOrderButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in ordersDataGrid.SelectedRows)
+            if (ordersDataGrid.SelectedRows.Count != 0)
             {
-                dbc.query("delete from orders where idOrder=" + row.Cells["idorder"].Value.ToString() + ";");
+                StringBuilder rows = new StringBuilder();
+                foreach (DataGridViewRow row in ordersDataGrid.SelectedRows)
+                {
+                    rows.Append(row.Cells["idOrder"].Value).Append(", ");
+                }
+                rows.Remove(rows.Length - 2, 2); // removes comma and space at the end
+                dbc.query("delete from orders where idOrder in (" + rows.ToString() + ");");
+                refreshOrders();
             }
-            refreshOrders();
         }
 
         public void setIdVehicle(int id)

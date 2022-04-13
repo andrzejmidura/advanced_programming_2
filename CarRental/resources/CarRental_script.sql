@@ -1,7 +1,7 @@
-drop table reservations;
-drop table orders;
-drop table vehicles;
-drop table clients;
+drop table reservations cascade;
+drop table orders cascade;
+drop table vehicles cascade;
+drop table clients cascade;
 
 begin;
 
@@ -31,6 +31,7 @@ create table orders(
 create table reservations(
 	idReservation	serial 	primary key,
 	idClient		integer not null references clients,
+	idOrder			integer not null references orders,
 	reservationDate	date 	not null
 );
 
